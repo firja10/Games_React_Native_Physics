@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "CodingKuy",
+    "slug": "CodingKuy",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "CodingKuy"
+}
