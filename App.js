@@ -12,7 +12,106 @@ import { useHistory } from "react-router-dom";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { WebView } from "react-native-webview";
 import YoutubePlayer from "react-native-youtube-iframe";
+// import ExpoGraphics from "expo-graphics";
+// import ExpoTHREE, { THREE } from 'expo-three';;
+
 // import {  } from "react-redux";
+
+
+
+function augmentedrealitybenar() {
+  return(
+
+      <ExpoGraphics.View 
+        style = {{flex:1}}
+      />
+
+  );
+}
+
+
+
+
+
+function beranda() {
+  return (
+  <View style = {{flex:1, justifyContent:'center', alignItems:'center', backgroundColor:'#f2f2f2'}}>
+    <Text>This is CodingYuk User Interface</Text>
+  </View>
+  );
+}
+
+
+
+
+
+
+function augmentedreality() {
+  return (
+  <View>
+   
+
+    <ImageBackground source={require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/arbg.jpeg')} resizeMode="cover" style = {{justifyContent:'center', alignItems:'center', height:700}} >
+    <View style = {{backgroundColor:'#ffff', padding:15, borderRadius:20, marginBottom:15}}>
+    <Text style = {{justifyContent:'center', alignItems:'center', fontSize:20, fontWeight:'bold', color:'#25627F'}}>Level 1 Hello World</Text> 
+    </View>
+      <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/robot.png')} style = {{width:200, height:300}} />
+      {/* <Text>Hello Adri {'\n'}Saya Ingin Jadi Engineer</Text> */}
+      <View style = {{alignItems:'center', justifyContent:'center', paddingLeft:15, paddingRight:15}}>
+      <Text style = {{color:'#ffff', fontSize:18, fontWeight:'bold', justifyContent:'center', alignItems:'center', paddingLeft:15, paddingRight:15, marginBottom:20}}>Hallo Fairuz Saya ingin jadi Engineer</Text>
+      
+      <View style = {{flexDirection:'row'}}>
+      <Icon
+      name='star'
+      type='font-awesome'
+      color='yellow'
+      onPress={() => console.log('hello')} 
+      style = {{marginTop:30, marginLeft:5, marginRight:5}}
+      />
+
+      <Icon
+      name='star'
+      type='font-awesome'
+      color='yellow'
+      onPress={() => console.log('hello')} 
+      style = {{marginTop:30}}
+      />
+
+      <Icon
+      name='star'
+      type='font-awesome'
+      color='yellow'
+      onPress={() => console.log('hello')} 
+      style = {{marginTop:30, marginLeft:5, marginRight:5}}
+      />
+
+      <Icon
+      name='star'
+      type='font-awesome'
+      color='yellow'
+      onPress={() => console.log('hello')} 
+      style = {{marginTop:30, marginLeft:5, marginRight:5}}
+      />
+
+      </View>
+
+      <TouchableOpacity style = {{backgroundColor:'#EC8D8E', marginTop:15, borderRadius:10}}>
+        <Text style = {{fontWeight:'bold', fontSize:20, padding:15, }}>Lanjut</Text>
+      </TouchableOpacity>
+
+      </View>
+  </ImageBackground>
+
+
+  </View>
+  );
+
+}
+
+
+
+
+
 
 
 
@@ -954,8 +1053,8 @@ const CustomDrawer = (props) =>{
   return <DrawerContentScrollView {...props} >
     <View style = {styles.user1}>
       <View>
-         <Text>Hallo</Text>
-         <Text>Fairuz Firjatullah</Text>
+         <Text style = {{color:'white'}}>Hallo</Text>
+         <Text style = {{color:'white', fontWeight:'bold'}}> Fairuz Firjatullah</Text>
         
       </View>
       <Image source = {{
@@ -992,9 +1091,20 @@ const DrawerNavigator = ()=>{
             drawerItemStyle:{
               display:'none',
             
-            }
+            },
+            drawerContentContainerStyle:{
+              display:'none',
+            },
+            // headerLeftContainerStyle:{
+            //   display:'none',
+            // }
+            gestureEnabled:false,
+            swipeEnabled:false
+         
           }}
+
           
+        
           
 
           />
@@ -1005,7 +1115,21 @@ const DrawerNavigator = ()=>{
 
 
 <Drawer.Screen component = {Landing} name = 'Beranda'   options={{
+          
           // title: 'My home',
+
+          drawerIcon:({color}) => <Icon
+          size={23}
+          name={'home'} type ={'font-awesome'} color = {color}></Icon>,
+
+          drawerItemStyle:{
+            activeBackgroundColor:'#ED8D8D',
+        
+          },
+
+          drawerActiveBackgroundColor:'rgba(237,141,141, 0.5)',
+          drawerActiveTintColor:'#f50',
+
           headerStyle: {
             backgroundColor: '#ED8D8D',
             // backgroundColor: 'transparent',
@@ -1021,6 +1145,7 @@ const DrawerNavigator = ()=>{
           headerTitleStyle: {
             fontWeight: 'bold',
             color:'#ED8D8D',
+            display:'none',
           },
         }} />
 
@@ -1053,11 +1178,15 @@ const DrawerNavigator = ()=>{
           headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold',
-            color:'#f4511e',
-          },
-          drawerItemStyle:{
+            // color:'#ED8D8D',
+            color:'#ffff',
             display:'none',
-          }
+
+          },
+          // headerShown:false,
+          // drawerItemStyle:{
+          //   display:'none',
+          // }
         }} 
         
         // options={{drawerLabel: NullComponent}}
@@ -1100,7 +1229,9 @@ const DrawerNavigator = ()=>{
       headerShown:false,
       drawerItemStyle:{
         display:'none',
-      }
+      },
+      gestureEnabled:false,
+      swipeEnabled:false,
     }}
 
     />
@@ -1127,6 +1258,20 @@ const DrawerNavigator = ()=>{
     <Drawer.Screen
     component = {test} name = 'Tes'
     />
+
+
+    <Drawer.Screen
+    component = {beranda} name = 'Land'
+    />
+
+    <Drawer.Screen
+    component = {augmentedreality} name = 'Augmented Reality'
+    options = {{
+      headerShown:false
+    }}
+    />
+
+    
 
 
 
@@ -1203,6 +1348,8 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     padding:15,
     alignItems:'center',
+    backgroundColor:'#ED8D8D',
+    marginBottom:10,
  
   },
 
