@@ -1,33 +1,88 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect} from 'react';
-import { Image, StyleSheet, Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Button } from 'react-native';
+import React, {useState, useEffect, Component} from 'react';
+import { Image, StyleSheet, Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Button, Alert } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import CircularProgress from "react-native-circular-progress-indicator";
 import * as Yup from 'yup';
-import { useFormik } from "formik";
+import {  useFormik } from "formik";
 import { Icon } from "react-native-elements";
 import { useHistory } from "react-router-dom";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { WebView } from "react-native-webview";
 import YoutubePlayer from "react-native-youtube-iframe";
-// import ExpoGraphics from "expo-graphics";
+
+
+import ExpoGraphics from "expo-graphics";
+import ExpoTHREE, {THREE} from "expo-three";
+import Expo from "expo";
+import Halaman from "./src/Masuk/Halaman";
+
+
+
+
+
+function cobalogin() {
+
+  <Halaman/>
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import Expo from "expo";
 // import ExpoTHREE, { THREE } from 'expo-three';;
 
-// import {  } from "react-redux";
+const onContextCreate = async({gl, scale, width, height, arSession}) => {
+  this.renderer = ExpoTHREE.createRenderer({gl});
+  this.renderer.setPixelRatio(scale);
+  this.renderer.setSize(width, height);
+
+  this.scene = new THREE.Scene();
+
+  this.scene.background = ExpoTHREE.CreateARBackgroundTexture(arSession, this.renderer);
+
+  this.camera = ExpoTHREE.createARCamera(arSession, width/scale, height/scale, 0.01, 1000);
+}
+
+const onRender = (delta) => {
+this.renderer.render(this.scene, this.camera);
+}
 
 
 
 function augmentedrealitybenar() {
+
+
+
+
   return(
 
       <ExpoGraphics.View 
         style = {{flex:1}}
+        onContextCreate={() => this.onContextCreate()}
+        onRender={() => this.onRender()}
+        arEnabled = {true}
       />
 
   );
 }
+
+
 
 
 
@@ -248,9 +303,29 @@ function levelsatubelajar(props) {
 
 function Levelsaturun(props) {
 
-  const inputlevel1 = '#include<stdio.h> \n \n int main() \n { \n printf("Hallo"); \n printf("NAMA:isi nama kamu") \n print("Tulis Cita-citamu"); \n return 0;  }';
 
-  const [text,BerubahTeks] = React.useState(inputlevel1);
+  var nama = "time";
+  var cita = "ohranger"
+  var inputlevel1 = '#include<stdio.h> \n \n int main() \n { \n printf("Hallo"); \n printf("NAMA:'+ nama +'"); \n print("' + cita +'"); \n return 0;  }';
+
+
+
+
+
+  var [text,BerubahTeks] = React.useState(inputlevel1);
+  
+  // const [text,BerubahTeks] = React.useState(inputlevel1);
+  var new_str = text.replace('#include<stdio.h> \n \n int main() \n { \n printf("', '');
+  var new_str2 = new_str.replace('"); \n printf("NAMA:', ' ');
+  var new_str3 = new_str2.replace('"); \n print("','\n');
+  var new_str4 = new_str3.replace('"); \n return 0;  }','')
+
+
+var Hasil = () => {
+  // var keadaan = this.state.new_str4;
+    alert(new_str4);
+  }
+
 
   const InputNilai = Yup.object().shape({
     kode: Yup.string().required('Required'),
@@ -265,7 +340,7 @@ function Levelsaturun(props) {
 
   const {
     handleChange,
-    handleSubmit,
+   submitForm,
     handleBlur,
     values,
     errors,
@@ -343,11 +418,13 @@ onPress={() => props.navigation.navigate('Level 1')} />
         // onChangeText={handleChange('kode')}
         // value = {inputlevel1} 
         // // onChangeText={BerubahTeks}
-        // onPress ={handleSubmit}
+        // onPress ={submitForm}
 
 
-        value = {text}
-        onChangeText={BerubahTeks}
+        // value = {text}
+        // onChangeText={BerubahTeks}
+        onChangeText={text=>BerubahTeks(text)}
+        defaultValue={text}
         multiline={true}
         numberOfLines={4} 
         
@@ -367,10 +444,11 @@ onPress={() => props.navigation.navigate('Level 1')} />
 
 
 
-
         <View style = {{marginTop:5}}>
 
-          <TouchableOpacity style = {{backgroundColor:'#ED8D8D', padding:15, borderRadius:20, width:100, justifyContent:'center', alignItems:'center'}} >
+          <TouchableOpacity style = {{backgroundColor:'#ED8D8D', padding:15, borderRadius:20, width:100, justifyContent:'center', alignItems:'center'}} 
+          // onPress = {()=>Hasil} >
+          onPress = {()=>Hasil()} >
             <Text style = {{fontWeight:'bold', fontSize:15, color:'#25627F'}}>
               RUN
             </Text>
@@ -715,7 +793,7 @@ function Login(props)
 
   const {
     handleChange,
-    handleSubmit,
+   submitForm,
     handleBlur,
     values,
     errors,
@@ -749,7 +827,7 @@ onChangeText={handleChange('name')}
   style={{width:'70%', height:30, backgroundColor:'#ffff', marginTop:20, borderRadius:10, paddingLeft:10}} />
 <TouchableOpacity style = {{width:'100%', height:30, backgroundColor:'#038089', marginTop:20, paddingTop:20, paddingBottom:20, paddingLeft:100, paddingRight:100, justifyContent:'center', borderRadius:30}}
 //  onPress ={()=>props.navigation.navigate('Beranda')}
-onPress ={handleSubmit}
+onPress ={submitForm}
  
  >
   <Text style = {{fontSize:20, fontWeight:'bold', color:'#ffff'}}>
@@ -1271,6 +1349,14 @@ const DrawerNavigator = ()=>{
     }}
     />
 
+<Drawer.Screen
+    component = {augmentedrealitybenar} name = 'Coba AR'
+    />
+
+
+<Drawer.Screen
+    component = {cobalogin} name = 'Coba Login'
+    />
     
 
 
@@ -1283,6 +1369,8 @@ const DrawerNavigator = ()=>{
 
 
 export default function App() {
+
+  
   return (
     // <View style={styles.container}>
     //   <Text>Open up App.js to start working on your app!</Text>
