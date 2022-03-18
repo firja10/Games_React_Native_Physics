@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect, Component} from 'react';
-import { Image, StyleSheet, Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Button, Alert } from 'react-native';
+import React, {useState, useEffect, Component, PureComponent} from 'react';
+import { Image, StyleSheet, Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Button, Alert, StatusBar } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -12,6 +12,8 @@ import { useHistory } from "react-router-dom";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { WebView } from "react-native-webview";
 import YoutubePlayer from "react-native-youtube-iframe";
+
+
 
 
 import ExpoGraphics from "expo-graphics";
@@ -64,6 +66,9 @@ this.renderer.render(this.scene, this.camera);
 }
 
 
+// const {width, height} = Dimension.get('window');
+
+
 
 function augmentedrealitybenar() {
 
@@ -106,11 +111,11 @@ function augmentedreality() {
   <View>
    
 
-    <ImageBackground source={require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/arbg.jpeg')} resizeMode="cover" style = {{justifyContent:'center', alignItems:'center', height:700}} >
+    <ImageBackground source={require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/arbg.jpeg')} resizeMode="cover" style = {{justifyContent:'center', alignItems:'center', height:700}} >
     <View style = {{backgroundColor:'#ffff', padding:15, borderRadius:20, marginBottom:15}}>
     <Text style = {{justifyContent:'center', alignItems:'center', fontSize:20, fontWeight:'bold', color:'#25627F'}}>Level 1 Hello World</Text> 
     </View>
-      <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/robot.png')} style = {{width:200, height:300}} />
+      <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/robot.png')} style = {{width:200, height:300}} />
       {/* <Text>Hello Adri {'\n'}Saya Ingin Jadi Engineer</Text> */}
       <View style = {{alignItems:'center', justifyContent:'center', paddingLeft:15, paddingRight:15}}>
       <Text style = {{color:'#ffff', fontSize:18, fontWeight:'bold', justifyContent:'center', alignItems:'center', paddingLeft:15, paddingRight:15, marginBottom:20}}>Hallo Fairuz Saya ingin jadi Engineer</Text>
@@ -385,7 +390,7 @@ onPress={() => props.navigation.navigate('Level 1')} />
       <View style = {{justifyContent:'center', alignItems:'center'}}>
       <Text style = {{color:'#25627F', alignItems:'center', justifyContent:'center', fontSize:20, fontWeight:'bold'}} >Level 1</Text>
       <Text style = {{color:'#25627F',  alignItems:'center', justifyContent:'center', fontSize:20, fontWeight:'bold'}} >"Hello World"</Text>
-      {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/hero-img.png')} style = {{width:120, height:120}} /> */}
+      {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/hero-img.png')} style = {{width:120, height:120}} /> */}
       </View>
       
     </View>
@@ -516,7 +521,7 @@ function Levelsatu(props) {
 
   //   <View style = {styles.levelsatupage1}>
 
-  //     <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/hero-img.png')} style = {{width:10, height:10}}  />
+  //     <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/hero-img.png')} style = {{width:10, height:10}}  />
 
 
   //   </View>
@@ -547,7 +552,7 @@ function Levelsatu(props) {
         </View>
 
         <View style = {{justifyContent:'center', alignItems:'center'}}>
-        <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/hero-img.png')} style = {{width:120, height:120}} />
+        <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/hero-img.png')} style = {{width:120, height:120}} />
         </View>
         
       </View>
@@ -573,7 +578,7 @@ function Levelsatu(props) {
 
             <View style = {{width:'30%', padding:15, justifyContent:'center'}}>
             {/* <Text>Hallo</Text> */}
-              <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/icons.png')} style = {{width:50, height:50}}  />
+              <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}}  />
             </View>
        
             <View  style = {{width:'60%', padding:15, justifyContent:'center'}}>
@@ -766,13 +771,193 @@ function scan(props) {
 
 
 
-function Home() {
+function Home(props) {
   return(
+    
     <View style = {styles.home}>
-      <Text>Home</Text>
+    
+    <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/home_1.png')} style = {{width:300, height:300}} />
+      {/* <Text>Home</Text> */}
+
+      <TouchableOpacity style = {{backgroundColor:'#221A82', paddingTop:10, paddingBottom:10, paddingRight:15, paddingLeft:15, borderRadius:20}} onPress = {()=>props.navigation.navigate('Login')} >
+          <Text style = {{fontSize:20, color:'#FFF7D4'}}>
+            Get Started
+          </Text>
+      </TouchableOpacity>
+
     </View>
+
+
   );
 }
+
+
+
+
+
+
+function Task() {
+  return(
+    // <View style = {styles.task}>
+    //   <Text>Task</Text>
+    // </View>
+
+
+    <View style = {styles.home}>
+      <Text style = {gaya.texthome}> Find your experiment
+you want to learn! </Text>
+
+
+
+
+
+
+
+
+<View style = {{width:'88%', height:100, backgroundColor:'#FF5757', marginTop:20, flexDirection:'row', borderRadius:20,}}>
+              <View style = {{justifyContent:'center', alignItems:'center', width:'25%',  marginLeft:5}}>
+                <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/works.png')} style = {{width:75, height:75}} />
+              </View>
+
+
+              <View style = {{justifyContent:'center', alignItems:'center', width:'30%', marginLeft:5, marginRight:5, }}>
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
+                 */}
+
+                <Text style = {{fontWeight:'bold', color:'#FFF7D4', fontSize:25}}>WORKS</Text>
+  
+              </View>
+
+
+
+              <View style = {{justifyContent:'center', alignItems:'center', width:'37%', marginRight:5, flexDirection:'row'}}>
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
+                 */}
+
+                {/* <Text style = {{fontWeight:'bold', color:'#435665'}}>25 %</Text> */}
+                <TouchableOpacity onPress={
+        ()=>props.navigation.navigate('Level 1')
+        } style = {{backgroundColor:'#221A82', paddingTop:5, paddingBottom:5,paddingLeft:10, paddingRight:10, borderRadius:10 }} >
+
+
+
+
+                {/* <Icon
+                  raised
+                  name='play'
+                  type='font-awesome'
+                  color='#f50'
+                  onPress={() => console.log('hello')} 
+                  size={15}
+                  /> */}
+
+                  <Text style = {{color:'#fff', fontWeight:'bold'}}> Explore </Text>
+
+
+
+                  {/* <CircularProgress /> */}
+
+                </TouchableOpacity>
+              </View>
+
+          </View>
+
+
+
+
+
+
+
+
+
+
+   <View style = {{width:'88%', height:100, backgroundColor:'#FF5757', marginTop:20, flexDirection:'row', borderRadius:20,}}>
+              <View style = {{justifyContent:'center', alignItems:'center', width:'25%',  marginLeft:5}}>
+                <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/energy.png')} style = {{width:70, height:70}} />
+              </View>
+
+
+              <View style = {{justifyContent:'center', alignItems:'center', width:'30%', marginLeft:5, marginRight:5, }}>
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
+                 */}
+
+                <Text style = {{fontWeight:'bold', color:'#FFF7D4', fontSize:25}}>ENERGY</Text>
+  
+              </View>
+
+
+
+              <View style = {{justifyContent:'center', alignItems:'center', width:'37%', marginRight:5, flexDirection:'row'}}>
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
+                 */}
+
+                {/* <Text style = {{fontWeight:'bold', color:'#435665'}}>25 %</Text> */}
+                <TouchableOpacity onPress={
+        ()=>props.navigation.navigate('Level 1')
+        } style = {{backgroundColor:'#221A82', paddingTop:5, paddingBottom:5,paddingLeft:10, paddingRight:10, borderRadius:10 }} >
+
+
+
+
+                {/* <Icon
+                  raised
+                  name='play'
+                  type='font-awesome'
+                  color='#f50'
+                  onPress={() => console.log('hello')} 
+                  size={15}
+                  /> */}
+
+                  <Text style = {{color:'#fff', fontWeight:'bold'}}> Explore </Text>
+
+
+
+                  {/* <CircularProgress /> */}
+
+                </TouchableOpacity>
+              </View>
+
+          </View>
+
+
+
+
+
+
+
+
+
+
+
+    </View>
+
+
+  );
+}
+
+
+
+const gaya = StyleSheet.create({
+    texthome:{
+      color:'#221A82',
+      fontSize:15,
+      fontWeight:'bold',
+    },
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -803,7 +988,7 @@ function Login(props)
     initialValues: { name: '' },
     onSubmit: values =>
       // alert(`Nama: ${values.name}`),
-      props.navigation.navigate('Beranda')
+      props.navigation.navigate('Task')
     
   });
 
@@ -813,8 +998,18 @@ function Login(props)
   return(
     <View style = {styles.login}>
 
-<ImageBackground source={require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/bg-login.png')} resizeMode="cover" style={styles.bgimage}>
-<Text style = {{justifyContent:'center', alignItems:'center', fontSize:30, fontWeight:'bold', color:'#ffff'}}> Yuk Daftar </Text>
+{/* <ImageBackground source={require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/bg-login.png')} resizeMode="cover" style={styles.bgimage}> */}
+
+
+
+<View style = {styles.bgimage}>
+
+<Text style = {{justifyContent:'center', alignItems:'center', fontSize:25, fontWeight:'bold', color:'#ffff', marginBottom:10,}}> Yuk Masukkan Username </Text>
+
+<Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/robot.png')} style = {{width:75, height:150}} />
+
+
+
 <TextInput 
 placeholder="Ketik Namamu"
 autoCapitalize='none'
@@ -825,17 +1020,18 @@ touched={touched.name}
 onChangeText={handleChange('name')}
 // onChangeText={KetikNama} value = {text}
   style={{width:'70%', height:30, backgroundColor:'#ffff', marginTop:20, borderRadius:10, paddingLeft:10}} />
-<TouchableOpacity style = {{width:'100%', height:30, backgroundColor:'#038089', marginTop:20, paddingTop:20, paddingBottom:20, paddingLeft:100, paddingRight:100, justifyContent:'center', borderRadius:30}}
+<TouchableOpacity style = {{width:'100%', height:30, backgroundColor:'#FFF7D4', marginTop:20, paddingTop:20, paddingBottom:20, paddingLeft:100, paddingRight:100, justifyContent:'center', borderRadius:30}}
 //  onPress ={()=>props.navigation.navigate('Beranda')}
 onPress ={submitForm}
  
  >
-  <Text style = {{fontSize:20, fontWeight:'bold', color:'#ffff'}}>
-    Daftar
+  <Text style = {{fontSize:20, fontWeight:'bold', color:'#FF5757'}}>
+    Masuk
   </Text>
 </TouchableOpacity>
+</View>
 
-</ImageBackground>
+{/* </ImageBackground> */}
 
     </View>
   )
@@ -853,13 +1049,20 @@ onPress ={submitForm}
 
 
 
-function Task() {
-  return(
-    <View style = {styles.task}>
-      <Text>Task</Text>
-    </View>
-  );
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function Landing(props){
 
@@ -872,12 +1075,12 @@ function Landing(props){
           
        <View style = {styles.landingutamakiri1}>
           <Text style = {styles.textlandingkiri1}>Welcome To CodingYuk !</Text>
-          {/* <Image source={require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/hero-img.png')} style = {{width:150,height:150,justifyContent:'center', alignItems:'center'}} /> */}
+          {/* <Image source={require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/hero-img.png')} style = {{width:150,height:150,justifyContent:'center', alignItems:'center'}} /> */}
         </View>
 
         <View style = {styles.landingutamakanan1}>
           {/* <Text style = {styles.textlandingkanan1}>Welcome To CodingYuk !</Text> */}
-          <Image source={require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/hero-img.png')} style = {{width:150,height:150,justifyContent:'center', alignItems:'center'}} />
+          <Image source={require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/hero-img.png')} style = {{width:150,height:150,justifyContent:'center', alignItems:'center'}} />
         <Text>{'\n'}</Text>
         </View>
 
@@ -917,7 +1120,7 @@ function Landing(props){
 
 
 <View style = {{width:'50%'}}>
-<Image source={require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/barcode.png')} style = {{width:140,height:140,justifyContent:'center', alignItems:'center'}} />
+<Image source={require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/barcode.png')} style = {{width:140,height:140,justifyContent:'center', alignItems:'center'}} />
 </View>
 
 
@@ -946,12 +1149,12 @@ function Landing(props){
 
           <View style = {{width:'88%', height:100, backgroundColor:'rgba(203,108,230, 0.4)', marginTop:20, flexDirection:'row', borderRadius:20,}}>
               <View style = {{justifyContent:'center', alignItems:'center', width:'25%',  marginLeft:5}}>
-                <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/icons.png')} style = {{width:50, height:50}} />
+                <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
               </View>
 
 
               <View style = {{justifyContent:'center', alignItems:'center', width:'30%', marginLeft:5, marginRight:5, }}>
-                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/icons.png')} style = {{width:50, height:50}} />
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
                  */}
 
                 <Text style = {{fontWeight:'bold', color:'#435665'}}>Level 1 {'\n'}Hello World</Text>
@@ -960,7 +1163,7 @@ function Landing(props){
 
 
               <View style = {{justifyContent:'center', alignItems:'center', width:'37%', marginRight:5, flexDirection:'row'}}>
-                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/icons.png')} style = {{width:50, height:50}} />
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
                  */}
 
                 <Text style = {{fontWeight:'bold', color:'#435665'}}>25 %</Text>
@@ -990,12 +1193,12 @@ function Landing(props){
 
           <View style = {{width:'88%', height:100, backgroundColor:'rgba(255, 222, 89, 0.4)', marginTop:20, flexDirection:'row', borderRadius:20,}}>
               <View style = {{justifyContent:'center', alignItems:'center', width:'25%',  marginLeft:5}}>
-                <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/math-op-basic.png')} style = {{width:50, height:50}} />
+                <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/math-op-basic.png')} style = {{width:50, height:50}} />
               </View>
 
 
               <View style = {{justifyContent:'center', alignItems:'center', width:'30%', marginLeft:5, marginRight:5, }}>
-                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/icons.png')} style = {{width:50, height:50}} />
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
                  */}
 
                 <Text style = {{fontWeight:'bold', color:'#435665'}}>Level 2 {'\n'}Yuk Berhitung 1</Text>
@@ -1004,7 +1207,7 @@ function Landing(props){
 
 
               <View style = {{justifyContent:'center', alignItems:'center', width:'37%', marginRight:5, flexDirection:'row'}}>
-                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/icons.png')} style = {{width:50, height:50}} />
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
                  */}
 
                 <Text style = {{fontWeight:'bold', color:'#435665'}}>25 %</Text>
@@ -1042,12 +1245,12 @@ function Landing(props){
 
           <View style = {{width:'88%', height:100, backgroundColor:'rgba(140,82,255, 0.1)', marginTop:20, flexDirection:'row', borderRadius:20,}}>
               <View style = {{justifyContent:'center', alignItems:'center', width:'25%',  marginLeft:5}}>
-                <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/math-op.png')} style = {{width:50, height:50}} />
+                <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/math-op.png')} style = {{width:50, height:50}} />
               </View>
 
 
               <View style = {{justifyContent:'center', alignItems:'center', width:'30%', marginLeft:5, marginRight:5, }}>
-                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/icons.png')} style = {{width:50, height:50}} />
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
                  */}
 
                 <Text style = {{fontWeight:'bold', color:'#435665'}}>Level 3 {'\n'}Yuk Berhitung 2</Text>
@@ -1056,7 +1259,7 @@ function Landing(props){
 
 
               <View style = {{justifyContent:'center', alignItems:'center', width:'37%', marginRight:5, flexDirection:'row'}}>
-                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/CodingKuy/src/icons.png')} style = {{width:50, height:50}} />
+                {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/icons.png')} style = {{width:50, height:50}} />
                  */}
 
                 <Text style = {{fontWeight:'bold', color:'#435665'}}>25 %</Text>
@@ -1164,6 +1367,47 @@ const DrawerNavigator = ()=>{
   return <Drawer.Navigator drawerContent = {(props)=><CustomDrawer {...props}/>} >
 
 
+
+
+<Drawer.Screen component = {Home} name = 'Home'   options={{
+          // title: 'My home',
+          headerShown: false,
+          gestureEnabled:false,
+          swipeEnabled:false,
+
+          
+          headerStyle: {
+            backgroundColor: '#ED8D8D',
+            // height:'50%',
+            // borderRadius:20,
+            // marginTop:20,
+            
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            // color:'#ED8D8D',
+            color:'#ffff',
+            display:'none',
+
+          },
+          // headerShown:false,
+          // drawerItemStyle:{
+          //   display:'none',
+          // }
+        }} 
+        
+        // options={{drawerLabel: NullComponent}}
+        />
+
+
+
+
+
+
+
+
+
 <Drawer.Screen component = {Login} name = 'Login'    options={{
             headerShown: false,
             drawerItemStyle:{
@@ -1186,6 +1430,24 @@ const DrawerNavigator = ()=>{
           
 
           />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1244,31 +1506,6 @@ const DrawerNavigator = ()=>{
 
 
     
-    <Drawer.Screen component = {Home} name = 'Home'   options={{
-          // title: 'My home',
-          headerStyle: {
-            backgroundColor: '#ED8D8D',
-            // height:'50%',
-            // borderRadius:20,
-            // marginTop:20,
-            
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            // color:'#ED8D8D',
-            color:'#ffff',
-            display:'none',
-
-          },
-          // headerShown:false,
-          // drawerItemStyle:{
-          //   display:'none',
-          // }
-        }} 
-        
-        // options={{drawerLabel: NullComponent}}
-        />
 
 
 
@@ -1281,6 +1518,9 @@ const DrawerNavigator = ()=>{
     <Drawer.Screen component = {Task} name = 'Task'
     
     options = {{
+
+      headerShown:false,
+
       drawerItemStyle:{
         activeBackgroundColor:'#424242',
       }
@@ -1291,6 +1531,8 @@ const DrawerNavigator = ()=>{
     <Drawer.Screen component = {Levelsatu} name = 'Level 1'
     options = {{
       headerShown:false,
+
+
       headerStyle :{
         backgroundColor:'#424242',
       },
@@ -1411,6 +1653,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     borderBottomColor:'#fff',
+    backgroundColor:'#FFF7D4',
 
   },
 
@@ -1560,7 +1803,8 @@ const styles = StyleSheet.create({
   },
 
   login:{
-    backgroundColor:'#435665',
+    // backgroundColor:'#435665',
+    backgroundColor:'#221A82',
     height:'100%',
     width:'100%',
   },
