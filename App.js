@@ -1,10 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import React, {useState, useEffect, Component, PureComponent} from 'react';
+// import { StatusBar } from 'expo-status-bar';
+import React, {useState, useEffect, Component, PureComponent, useCallback} from 'react';
 import { Image, StyleSheet, Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Button, Alert, StatusBar } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, PanGestureHandler, PanGestureHandlerGestureEvent, TapGestureHandler } from 'react-native-gesture-handler';
 import CircularProgress from "react-native-circular-progress-indicator";
+import { onGestureEvent } from "react-native-redash";
 import * as Yup from 'yup';
 import {  useFormik } from "formik";
 import { Icon } from "react-native-elements";
@@ -12,6 +13,16 @@ import { useHistory } from "react-router-dom";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { WebView } from "react-native-webview";
 import YoutubePlayer from "react-native-youtube-iframe";
+
+
+import {GameEngine} from 'react-native-game-engine';
+
+import Physics from './Physics';
+
+import Constants from './Constants';
+
+import Game from './Game';
+
 
 
 
@@ -24,19 +35,461 @@ import Halaman from "./src/Masuk/Halaman";
 
 
 
+// react-native-reanimated
+import Animated, {useAnimatedGestureHandler, useAnimatedStyle, useSharedValue, useRef, withSpring, withTiming} from 'react-native-reanimated';
+// import {  } from "react-native-";
 
-function cobalogin() {
+const SIZE = 50.0;
 
-  <Halaman/>
+// const translationXRef = useRef(new Animated.Value(0));
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const gameEngine = null;
+// const entities = setupWorld;
+// const state = {
+//   running: true
+// };
+
+
+
+
+// const setupWorld = () => {
+//   let engine = Matter.Engine.create({ enableSleeping: false });
+//   let world = engine.world;
+
+//   let bird = Matter.Bodies.rectangle( Constants.MAX_WIDTH / 4, Constants.MAX_HEIGHT / 2, 50, 50);
+
+//   Matter.World.add(world, [bird]);
+
+
+//   return {
+//       physics: { engine: engine, world: world },
+//       bird: { body: bird, size: [50, 50], color: 'red', renderer: Bird},
+//   }
+// }
+
+
+
+function animategame() {
+  
+  return (
+
+    <Game />
+
+  );
 
 }
 
 
 
 
+
+
+
+
+
+// ANIMASI BRINA 1
+function WorkAnimated() {
+
+
+
+
+  var inputnilaimassa = '20';
+
+  var [massa,onChangeMassa] = React.useState(null);
+
+  var [percepatan,onChangePercepatan] = React.useState(null);
+
+  var [jarak, onChangeJarak] = React.useState(null);
+
+  var [usaha, onChangeUsaha] = React.useState(null);
+
+
+
+  const Gaya = () =>{
+    // e.preventDefault();
+    let F = parseFloat(massa)*parseFloat(percepatan)*parseFloat(jarak);
+    onChangeUsaha(F);
+
+  }
+
+
+  const Posisi = () => {
+    x.value=onChange(jarak);    
+  }
+
+
+
+
+
+  const translateX = useSharedValue(0);
+  const pressed = useSharedValue(false);
+
+  const panGestureEvent = useAnimatedGestureHandler<PanGestureHandlerGestureEvent>({
+    onStart:(event)=>{},
+    onActive:(event)=>{
+      translateX.value = event.translationX;
+      // console.log(event.translationX);
+    },
+    onEnd:(event)=>{},
+  });
+
+
+
+  // const startingPosition = 50;
+  const startingPosition = 150;
+  // const startingPositionx = (Dimensions.get('window').width)/2;
+  const startingPositionx = 0;
+  const x = useSharedValue(startingPositionx);
+  const y = useSharedValue(startingPosition);
+
+
+
+
+  const eventHandler = useAnimatedGestureHandler({
+    onStart: (event, ctx) => {
+      pressed.value = true;
+      ctx.startX = x.value;
+      ctx.startY = y.value;
+    },
+    onActive: (event, ctx) => {
+      x.value = ctx.startX + event.translationX;
+      // y.value = ctx.startY + event.translationY;
+      y.value = startingPosition;
+    },
+    onEnd: (event, ctx) => {
+      pressed.value = false;
+      // x.value = withSpring(startingPosition);
+      // y.value = withSpring(startingPosition);
+      x.value = ctx.startX + event.translationX;
+      // y.value = ctx.startY + event.translationY;
+      y.value = startingPosition;
+    },
+  });
+
+
+
+
+  // const InGestureEvent = useCallback(
+
+
+
+  // );
+
+  const rStyle = useAnimatedStyle(()=>{
+
+    return {
+
+      transform:[{
+
+        translateX : translateX.value,
+
+      },
+    ],
+
+    };
+
+  });
+
+
+
+
+
+
+  const SetJarak = () =>{
+    x.value = (jarak)*(-2) ;
+  }
+
+
+
+
+  const uas = useAnimatedStyle(() => {
+    return {
+      backgroundColor: pressed.value ? '#FEEF86' : '#FF0000',
+      // transform: [{ translateX: x.value }, { translateY: y.value }],
+      transform: [{ translateX: withSpring(x.value,{
+        damping:massa,
+        stiffness:percepatan,
+      })  }, { translateY: y.value }],
+    };
+  });
+
+
+  const bendausaha = useAnimatedStyle(() => {
+    return {
+      backgroundColor: pressed.value ? '#FEEF86' : '#FF0000',
+      // transform: [{ translateX: x.value }, { translateY: y.value }],
+      transform: [{ translateX: withSpring(x.value)  }, { translateY: y.value }],
+    };
+  });
+
+
+
+  
+
+
+ 
+  return(
+
+
+
+  <View>
+<ScrollView>
+
+
+
+<View style = {animatestyle.containerBesar}>
+{/* <Game/> */}
+
+        {/* <GameEngine
+                    ref={gameEngine}
+                    style={styles.gameContainer}
+                    running={state.running}
+                    systems={[Physics]}
+                    entities={entities}>
+                    <StatusBar hidden={true} />
+                </GameEngine> */}
+
+
+         
+
+
+
+
+<View style={animatestyle.container}>
+      {/* <View style = {{marginTop:20, backgroundColor:'#000'}}> */}
+
+      <PanGestureHandler onGestureEvent={eventHandler}>
+        <Animated.View style={[animatestyle.square, uas]}  />
+      </PanGestureHandler>
+
+
+
+      {/* <Game/> */}
+
+    
+
+      {/* </View> */}
+
+</View>
+
+<View style = {{backgroundColor:'#FF5757', justifyContent:'center', alignItems:'center',  zIndex:1, width:'100%', flex:2, marginTop:'50%'}}>
+
+
+
+<View style = {{flex:1, width:'100%', flexDirection:'row', justifyContent:'center', marginTop:'10%'}}>
+
+<View style = {{alignContent:'space-between', flexDirection:'column'}}>
+<Text style = {{justifyContent:'center', alignContent:'center', textAlign:'center', color:'#fff'}}>Massa</Text>
+<TextInput style = {{marginTop:'5%', alignContent:'space-between', padding:10, flexDirection:'row', borderRadius:20, height:40, width:100, backgroundColor:'#f2f2f2', color:'#000', fontWeight:'bold', marginLeft:5, marginRight:5}}
+
+// onChangeText={text=>BerubahTeks(text)}
+// defaultValue={text}
+// multiline={true}
+// numberOfLines={4} 
+onChangeText={onChangeMassa}
+value = {massa}
+placeholder="Kg"
+keyboardType="numeric"
+
+
+/>
+
+</View>
+
+
+
+
+
+<View style = {{alignContent:'space-between', flexDirection:'column'}}>
+<Text style = {{justifyContent:'center', alignContent:'center', textAlign:'center', color:'#fff'}}>Percepatan</Text>
+<TextInput style = {{marginTop:'5%', alignContent:'space-between', padding:10, flexDirection:'row', borderRadius:20, height:40, width:100, backgroundColor:'#f2f2f2', color:'#25627F', fontWeight:'bold', marginLeft:5, marginRight:5}}
+
+// onChangeText={text=>BerubahTeks(text)}
+// defaultValue={text}
+// multiline={true}
+// numberOfLines={4} 
+onChangeText={onChangePercepatan}
+value = {percepatan}
+placeholder="M/S^2"
+keyboardType="numeric"
+
+
+/>
+</View>
+
+
+
+
+
+
+
+
+<View style = {{alignContent:'space-between', flexDirection:'column'}}>
+<Text style = {{justifyContent:'center', alignContent:'center', textAlign:'center', color:'#fff'}}>Jarak</Text>
+<TextInput style = {{marginTop:'5%', alignContent:'space-between', padding:10, flexDirection:'row', borderRadius:20, height:40, width:100, backgroundColor:'#f2f2f2', color:'#000', fontWeight:'bold', marginLeft:5, marginRight:5}}
+
+// onChangeText={text=>BerubahTeks(text)}
+// defaultValue={text}
+// multiline={true}
+// numberOfLines={4} 
+onChangeText={onChangeJarak}
+value={jarak}
+placeholder="Meter"
+keyboardType="numeric"
+
+/>
+</View>
+
+
+
+
+
+</View>
+
+
+<View style = {{flex:2, width:'100%', flexDirection:'column', justifyContent:'center', marginTop:'10%', alignItems:'center'}}>
+
+
+
+
+<TouchableOpacity style = {{backgroundColor:'#fff', padding:10, marginTop:10, borderRadius:10}}
+onPress = {()=>{Gaya() ; SetJarak()}}
+>
+    <Text style = {{color:'#000', fontWeight:'bold'}}>Lihat Hasil Perhitungan</Text>
+</TouchableOpacity>
+
+
+<Text style = {{color:'#FFF7D4', fontWeight:'bold'}}>{'\n'} W = {usaha} Joule</Text>
+
+
+
+<TouchableOpacity style = {animatestyle.button1} onPress = {()=>(x.value=5, y.value=150)}>
+  <Text style = {{color:'#FF5757', fontWeight:'bold'}} >Jalankan Simulasi</Text>
+</TouchableOpacity>
+
+
+
+
+
+
+</View>
+
+<View style = {{flex:3, width:'100%', flexDirection:'row', justifyContent:'center', marginTop:'10%'}}>
+<Text style = {{color:'#fff'}} >Silakan Pilih</Text>
+<Text>{'\n'}</Text>
+
+
+
+
+
+
+</View>
+
+</View>
+
+</View>
+</ScrollView>
+
+  </View>
+
+   
+  );
+
+}
+
+
+
+
+const animatestyle = StyleSheet.create({
+  containerBesar:{
+    flex:1,
+    backgroundColor:'#000',
+    alignItems:'center',
+    justifyContent:'center',
+    height:'100%',
+  },
+  
+  
+    container:{
+      flex:1,
+      backgroundColor:'#fff',
+      alignItems:'center',
+      justifyContent:'center',
+      zIndex:2,
+      width:'100%',
+    },
+
+    containerdua:{
+      backgroundColor:'#008000',
+    },
+    square:{
+      width:SIZE,
+      height:SIZE,
+      backgroundColor:'#0000ff',
+    },
+
+    button1:{
+
+      alignItems:'center',
+      backgroundColor:'#FFF7D4',
+      color:'#FF5757',
+      padding:10,
+      marginTop:'5%',
+      borderRadius:15,
+      width:'50%',
+      justifyContent:'center',
+      
+
+    },
+    gameContainer: {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+  },
+});
+
+
+
+
+
+
+function cobalogin() {
+
+  <Halaman/>
+
+}
+
+
+
+
+
+
+// React Native-Reanimated Element
+// const progress = useSharedValue(0);
 
 
 
@@ -796,7 +1249,7 @@ function Home(props) {
 
 
 
-function Task() {
+function Task(props) {
   return(
     // <View style = {styles.task}>
     //   <Text>Task</Text>
@@ -836,7 +1289,7 @@ you want to learn! </Text>
 
                 {/* <Text style = {{fontWeight:'bold', color:'#435665'}}>25 %</Text> */}
                 <TouchableOpacity onPress={
-        ()=>props.navigation.navigate('Level 1')
+        ()=>props.navigation.navigate('WorkAnimated')
         } style = {{backgroundColor:'#221A82', paddingTop:5, paddingBottom:5,paddingLeft:10, paddingRight:10, borderRadius:10 }} >
 
 
@@ -1399,6 +1852,89 @@ const DrawerNavigator = ()=>{
         
         // options={{drawerLabel: NullComponent}}
         />
+
+
+
+
+
+
+
+
+
+
+<Drawer.Screen component = {WorkAnimated} name = 'WorkAnimated'   options={{
+          // title: 'My home',
+          headerShown: false,
+          // gestureEnabled:false,
+          // swipeEnabled:false,
+
+          
+          headerStyle: {
+            backgroundColor: '#ED8D8D',
+            // height:'50%',
+            // borderRadius:20,
+            // marginTop:20,
+            
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            // color:'#ED8D8D',
+            color:'#ffff',
+            display:'none',
+
+          },
+          // headerShown:false,
+          // drawerItemStyle:{
+          //   display:'none',
+          // }
+        }} 
+        
+        // options={{drawerLabel: NullComponent}}
+        />
+
+
+
+
+
+
+
+
+<Drawer.Screen component = {animategame} name = 'Animategame'   options={{
+          // title: 'My home',
+          headerShown: false,
+          // gestureEnabled:false,
+          // swipeEnabled:false,
+
+          
+          headerStyle: {
+            backgroundColor: '#ED8D8D',
+            // height:'50%',
+            // borderRadius:20,
+            // marginTop:20,
+            
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            // color:'#ED8D8D',
+            color:'#ffff',
+            display:'none',
+
+          },
+          // headerShown:false,
+          // drawerItemStyle:{
+          //   display:'none',
+          // }
+        }} 
+        
+        // options={{drawerLabel: NullComponent}}
+        />
+
+
+
+
+
 
 
 
