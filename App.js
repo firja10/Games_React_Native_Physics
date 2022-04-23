@@ -24,6 +24,25 @@ import Constants from './Constants';
 import Game from './Game';
 
 
+import Svg, { Line, G, Circle, Text as SvgText, Path } from 'react-native-svg';
+
+
+
+import LineGraph from "./LineGraph";
+
+
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from 'react-native-chart-kit';
+
+
+
+
 
 
 
@@ -91,15 +110,145 @@ const SIZE = 50.0;
 
 
 
-function animategame() {
-  
-  return (
 
-    <Game />
+
+
+function Energy(){
+  return(
+    <View>
+      <ScrollView>
+        <View style = {EnergyStyle.container1}>
+          <Text style = {{color:'#000'}}>Hallo
+          </Text>
+
+          <View style = {EnergyStyle.kotakbiru}>
+
+          </View>
+
+
+
+        </View>
+
+        <View style = {EnergyStyle.container2}>
+          <Text style = {{color:'#000'}}>Hallo</Text>
+        </View> 
+
+        <View style = {EnergyStyle.container3}>
+          <Text style = {{color:'#000'}}>Hallo</Text>
+        </View> 
+
+      </ScrollView>
+     
+
+
+
+    </View>
 
   );
 
+
+
+
 }
+
+
+
+
+const EnergyStyle = StyleSheet.create({
+
+
+  container1:{
+    flex:1,
+    backgroundColor:'#FFF7D4',
+    alignItems:'center',
+    justifyContent:'center',
+    zIndex:2,
+    width:'100%',
+    height:200,
+    marginTop:20,
+    marginBottom:20,
+    paddingTop:20,
+    paddingBottom:20,
+
+  },
+
+  container2:{
+    flex:2,
+    backgroundColor:'#FFF7D4',
+    alignItems:'center',
+    justifyContent:'center',
+    zIndex:2,
+    width:'100%',
+    height:'50%',
+    marginTop:20,
+    marginBottom:20,
+
+  },
+
+  container3:{
+    flex:3,
+    backgroundColor:'#FFF7D4',
+    alignItems:'center',
+    justifyContent:'center',
+    zIndex:2,
+    width:'100%',
+    height:'50%',
+    marginTop:20,
+    marginBottom:20,
+
+  },
+
+  kotakbiru:{
+
+    // flex:2,
+    width:15,
+    padding:20,
+    backgroundColor:'#0000FF',
+    alignItems:'center',
+    justifyContent:'center',
+    height:15,
+
+  },
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+function Linechart() {
+
+
+
+return(
+<LineGraph />
+);
+
+
+
+
+}
+
+
+
+
+// function animategame() {
+  
+//   return (
+
+//     <Game />
+
+//   );
+
+// }
 
 
 
@@ -244,7 +393,7 @@ function WorkAnimated() {
     };
   });
 
-
+  const windowswidth = Dimensions.get('window').width;
 
   
 
@@ -286,15 +435,28 @@ function WorkAnimated() {
 
 
 
+
+
+
       {/* <Game/> */}
 
     
 
       {/* </View> */}
 
-</View>
 
-<View style = {{backgroundColor:'#FF5757', justifyContent:'center', alignItems:'center',  zIndex:1, width:'100%', flex:2, marginTop:'50%'}}>
+</View>
+<Svg height="200" width={windowswidth}>
+        <Line x1="0" y1="150" x2={windowswidth} y2="150" stroke="red" strokeWidth="5" strokeLinecap='round' strokeDasharray="1, 20"/> 
+        <SvgText fill='white' textAnchor='middle'>
+          0 1 2
+        </SvgText>
+</Svg>
+
+
+
+
+<View style = {{backgroundColor:'#FF5757', justifyContent:'center', alignItems:'center',  zIndex:1, width:'100%', flex:2, marginTop:'10%'}}>
 
 
 
@@ -523,22 +685,6 @@ this.renderer.render(this.scene, this.camera);
 
 
 
-function augmentedrealitybenar() {
-
-
-
-
-  return(
-
-      <ExpoGraphics.View 
-        style = {{flex:1}}
-        onContextCreate={() => this.onContextCreate()}
-        onRender={() => this.onRender()}
-        arEnabled = {true}
-      />
-
-  );
-}
 
 
 
@@ -1822,6 +1968,16 @@ const DrawerNavigator = ()=>{
 
 
 
+
+
+
+
+
+
+
+
+
+
 <Drawer.Screen component = {Home} name = 'Home'   options={{
           // title: 'My home',
           headerShown: false,
@@ -1852,7 +2008,46 @@ const DrawerNavigator = ()=>{
         
         // options={{drawerLabel: NullComponent}}
         />
+        
 
+
+
+
+
+
+
+
+
+<Drawer.Screen component = {Energy} name = 'Energy'   options={{
+          // title: 'My home',
+          headerShown: false,
+          // gestureEnabled:false,
+          // swipeEnabled:false,
+
+          
+          headerStyle: {
+            backgroundColor: '#ED8D8D',
+            // height:'50%',
+            // borderRadius:20,
+            // marginTop:20,
+            
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            // color:'#ED8D8D',
+            color:'#ffff',
+            display:'none',
+
+          },
+          // headerShown:false,
+          // drawerItemStyle:{
+          //   display:'none',
+          // }
+        }} 
+        
+        // options={{drawerLabel: NullComponent}}
+        />
 
 
 
@@ -1894,13 +2089,7 @@ const DrawerNavigator = ()=>{
         />
 
 
-
-
-
-
-
-
-<Drawer.Screen component = {animategame} name = 'Animategame'   options={{
+<Drawer.Screen component = {Linechart} name = 'Linechart'   options={{
           // title: 'My home',
           headerShown: false,
           // gestureEnabled:false,
@@ -1930,6 +2119,45 @@ const DrawerNavigator = ()=>{
         
         // options={{drawerLabel: NullComponent}}
         />
+
+
+
+
+
+
+
+
+
+{/* <Drawer.Screen component = {animategame} name = 'Animategame'   options={{
+          // title: 'My home',
+          headerShown: false,
+          // gestureEnabled:false,
+          // swipeEnabled:false,
+
+          
+          headerStyle: {
+            backgroundColor: '#ED8D8D',
+            // height:'50%',
+            // borderRadius:20,
+            // marginTop:20,
+            
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            // color:'#ED8D8D',
+            color:'#ffff',
+            display:'none',
+
+          },
+          // headerShown:false,
+          // drawerItemStyle:{
+          //   display:'none',
+          // }
+        }} 
+        
+        // options={{drawerLabel: NullComponent}}
+        /> */}
 
 
 
@@ -2127,9 +2355,7 @@ const DrawerNavigator = ()=>{
     }}
     />
 
-<Drawer.Screen
-    component = {augmentedrealitybenar} name = 'Coba AR'
-    />
+
 
 
 <Drawer.Screen
