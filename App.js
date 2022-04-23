@@ -117,24 +117,89 @@ function Energy(){
   return(
     <View>
       <ScrollView>
-        <View style = {EnergyStyle.container1}>
-          <Text style = {{color:'#000'}}>Hallo
-          </Text>
 
-          <View style = {EnergyStyle.kotakbiru}>
+
+        <View style = {EnergyStyle.container1}>
+          <View style = {EnergyStyle.panci1}>
+          <View  style = {EnergyStyle.kotakbesi}>
+          <Text style = {{color:'#fff', fontSize:15, flex:1, alignItems:'center', justifyContent:'center'}}>Besi
+          </Text>
+          </View>
+
+          <View style = {{alignItems:'center', justifyContent:'center', marginBottom:-55, zIndex:3}}>
+          <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/tripod.png')} style = {{width:70, height:70 }} />
+          </View>
+
+          <View style = {{alignItems:'center', justifyContent:'center'}}>
+          <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/api.png')} style = {{width:50, height:50 }} />
+          </View>
+
+
+          </View>
+
+          <View style = {EnergyStyle.panci2}>
+          <View  style = {EnergyStyle.kotakbata}>
+          <Text style = {{color:'#fff', fontSize:15, flex:1, alignItems:'center', justifyContent:'center'}}>Bata
+          </Text>
+          </View>
+          <View style = {{alignItems:'center', justifyContent:'center', marginBottom:-55, zIndex:3}}>
+          <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/tripod.png')} style = {{width:70, height:70 }} />
+          </View>
+
+          <View style = {{alignItems:'center', justifyContent:'center'}}>
+          <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/ice.png')} style = {{width:50, height:50 }} />
+          </View>
+
+
+          </View>
+
+    
+
+        </View>
+
+  
+
+
+
+
+        <View style = {EnergyStyle.container2}>
+        <TouchableOpacity style = {EnergyStyle.tombolplay}>
+              <Text style = {{color:'#fff'}}>Play</Text>
+        </TouchableOpacity>
+        </View> 
+
+        <View style = {EnergyStyle.container3}>
+
+          <View style = {EnergyStyle.controlBesi}>
+
+
+          <TouchableOpacity style = {{padding:10, width:70, height:50, backgroundColor:'#FF0000', alignItems:'center', marginRight:10, marginLeft:10}}>
+            <Text style = {{color:'#fff'}}>Panas</Text>
+          </TouchableOpacity>
+
+          
+          <TouchableOpacity style = {{padding:10, width:70, height:50, backgroundColor:'#FF0000', alignItems:'center', marginRight:10, marginLeft:10}}>
+            <Text style = {{color:'#fff'}}>Dingin</Text>
+          </TouchableOpacity>
 
           </View>
 
 
+          <View style = {EnergyStyle.controlBata} >
+          <TouchableOpacity style = {{padding:10, width:70, height:50, backgroundColor:'#FF0000', alignItems:'center', marginRight:10, marginLeft:10}}>
+            <Text style = {{color:'#fff'}}>Panas</Text>
+          </TouchableOpacity>
 
-        </View>
+          
+          <TouchableOpacity style = {{padding:10, width:70, height:50, backgroundColor:'#FF0000', alignItems:'center', marginRight:10, marginLeft:10}}>
+            <Text style = {{color:'#fff'}}>Dingin</Text>
+          </TouchableOpacity>
+          </View>
 
-        <View style = {EnergyStyle.container2}>
-          <Text style = {{color:'#000'}}>Hallo</Text>
-        </View> 
 
-        <View style = {EnergyStyle.container3}>
-          <Text style = {{color:'#000'}}>Hallo</Text>
+         
+
+
         </View> 
 
       </ScrollView>
@@ -162,13 +227,14 @@ const EnergyStyle = StyleSheet.create({
     backgroundColor:'#FFF7D4',
     alignItems:'center',
     justifyContent:'center',
-    zIndex:2,
+    // zIndex:2,
     width:'100%',
     height:200,
     marginTop:20,
-    marginBottom:20,
+    // marginBottom:20,
     paddingTop:20,
     paddingBottom:20,
+    flexDirection:'row',
 
   },
 
@@ -180,8 +246,8 @@ const EnergyStyle = StyleSheet.create({
     zIndex:2,
     width:'100%',
     height:'50%',
-    marginTop:20,
-    marginBottom:20,
+    // marginTop:20,
+    // marginBottom:20,
 
   },
 
@@ -193,23 +259,84 @@ const EnergyStyle = StyleSheet.create({
     zIndex:2,
     width:'100%',
     height:'50%',
-    marginTop:20,
+    // marginTop:20,
+    paddingBottom:20,
     marginBottom:20,
+    flexDirection:'row',
 
   },
 
-  kotakbiru:{
+  kotakbesi:{
 
     // flex:2,
-    width:15,
-    padding:20,
-    backgroundColor:'#0000FF',
+    width:70,
+    paddingTop:30,
+    backgroundColor:'#737373',
     alignItems:'center',
     justifyContent:'center',
-    height:15,
+    height:70,
+    marginBottom:-15,
+     zIndex:4,
 
   },
 
+  kotakbata:{
+
+    // flex:2,
+    width:70,
+    paddingTop:30,
+    backgroundColor:'#b22222',
+    alignItems:'center',
+    justifyContent:'center',
+    height:70,
+    marginBottom:-15,
+     zIndex:4,
+
+  },
+
+  panci1:{
+    marginRight:10,
+    marginLeft:10,
+    marginBottom:-15,
+  },
+
+  panci2:{
+    marginRight:10,
+    marginLeft:10,
+    marginBottom:-15,
+  },
+
+  tombolplay:{
+    backgroundColor:'#000',
+    width:100,
+    padding:15,
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:15,
+    marginBottom:15,
+
+  },
+
+  controlBesi:{
+
+    marginRight:10,
+    marginLeft:10,
+    alignItems:'center',
+    justifyContent:'center',
+    flexDirection:'row',
+
+  },
+
+
+  controlBata:{
+
+    marginRight:10,
+    marginLeft:10,
+    alignItems:'center',
+    justifyContent:'center',
+    flexDirection:'row',
+
+  },
 
 
 
