@@ -1,6 +1,6 @@
 // import { StatusBar } from 'expo-status-bar';
 import React, {useState, useEffect, Component, PureComponent, useCallback} from 'react';
-import { Image, StyleSheet, Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Button, Alert, StatusBar } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, SafeAreaView, TextInput, Dimensions, ImageBackground, Button, Alert, StatusBar, Switch } from 'react-native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, PanGestureHandler, PanGestureHandlerGestureEvent, TapGestureHandler } from 'react-native-gesture-handler';
@@ -40,6 +40,8 @@ import {
   StackedBarChart
 } from 'react-native-chart-kit';
 
+
+import Slider from '@react-native-community/slider';
 
 
 
@@ -114,6 +116,78 @@ const SIZE = 50.0;
 
 
 function Energy(){
+
+
+  const [range, setRange] = useState(50);
+  const [sliding, setSliding] = useState('Inactive');
+
+  const [rangedua, setRangedua] = useState(50);
+  const [slidingdua, setSlidingdua] = useState('Inactive');
+
+
+  const api = require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/api.png');
+  const ice = require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/ice.png');
+  const gambar = {api, ice};
+
+
+ var [picsapi, setPicsapi] = React.useState(gambar.api);
+
+ var [picsice, setPicice] = React.useState(gambar.ice);
+
+
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+  // const nilaiSwitchBesi = parseInt(value*100) + '%';
+
+
+  const BerubahBesi = () => {
+    if(range < 50){
+
+      picsapi = setPicsapi(gambar.ice);
+      // picsice = setPicice(gambar.ice);
+
+    }
+
+    else if (range > 50) {
+      picsapi = setPicsapi(gambar.api);
+      // picsice = setPicice(gambar.ice);
+    } 
+    
+    else {
+      picsapi = setPicsapi(gambar.api);
+      // picsice = setPicice(gambar.ice);
+    }
+
+  }
+
+
+
+
+
+  const BerubahBata = () => {
+    if(rangedua > 50){
+
+      picsice = setPicice(gambar.api);
+      // picsice = setPicice(gambar.ice);
+
+    }
+
+    else if (rangedua < 50) {
+      picsice = setPicice(gambar.ice);
+      // picsice = setPicice(gambar.ice);
+    } 
+    
+    else {
+      picsice = setPicice(gambar.ice);
+      // picsice = setPicice(gambar.ice);
+    }
+
+  }
+
+
+
+
   return(
     <View>
       <ScrollView>
@@ -122,8 +196,7 @@ function Energy(){
         <View style = {EnergyStyle.container1}>
           <View style = {EnergyStyle.panci1}>
           <View  style = {EnergyStyle.kotakbesi}>
-          <Text style = {{color:'#fff', fontSize:15, flex:1, alignItems:'center', justifyContent:'center'}}>Besi
-          </Text>
+          <Text style = {{color:'#fff', fontSize:15, flex:1, alignItems:'center', justifyContent:'center'}}>Besi</Text> 
           </View>
 
           <View style = {{alignItems:'center', justifyContent:'center', marginBottom:-55, zIndex:3}}>
@@ -131,7 +204,10 @@ function Energy(){
           </View>
 
           <View style = {{alignItems:'center', justifyContent:'center'}}>
-          <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/api.png')} style = {{width:50, height:50 }} />
+
+          {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/api.png')} style = {{width:50, height:50 }} /> */}
+          <Image source = {picsapi} style = {{width:50, height:50 }} />
+          
           </View>
 
 
@@ -147,7 +223,8 @@ function Energy(){
           </View>
 
           <View style = {{alignItems:'center', justifyContent:'center'}}>
-          <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/ice.png')} style = {{width:50, height:50 }} />
+          {/* <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/ice.png')} style = {{width:50, height:50 }} /> */}
+          <Image source = {picsice} style = {{width:50, height:50 }} />
           </View>
 
 
@@ -163,38 +240,66 @@ function Energy(){
 
 
         <View style = {EnergyStyle.container2}>
-        <TouchableOpacity style = {EnergyStyle.tombolplay}>
-              <Text style = {{color:'#fff'}}>Play</Text>
+  
+
+        
+        <Text style = {{fontSize:20, fontWeight:'bold'}}>Temperatur Besi : {range} {'\u00b0'}C {'\n'}</Text>
+        <Text>Status : {sliding}</Text>
+
+        <Slider 
+      style = {{width:250, height:40}}
+      minimumValue = {0}
+      maximumValue = {100}
+      minimumTrackTintColor = 'tomato'
+      maximumTrackTintColor='#000'
+      thumbTintColor='tomato'
+      value={0}
+      onValueChange={value=>setRange(value)}
+      onSlidingStart={()=>setSliding('Sliding')}
+      onSlidingComplete={()=>setSliding('Active')}
+      />
+
+
+      <TouchableOpacity style = {EnergyStyle.tombolplayBesi} onPress = {()=>{BerubahBesi()}}>
+              <Text style = {{color:'#fff', alignItems:'center', textAlign:'center'}}>Lihat Reaksi Besi</Text>
         </TouchableOpacity>
+
+
         </View> 
 
         <View style = {EnergyStyle.container3}>
 
-          <View style = {EnergyStyle.controlBesi}>
+        <Text style = {{fontSize:20, fontWeight:'bold'}}>Temperatur Bata : {rangedua} {'\u00b0'}C {'\n'}</Text>
+        <Text>Status : {slidingdua}</Text>
+
+        <Slider 
+      style = {{width:250, height:40}}
+      minimumValue = {0}
+      maximumValue = {100}
+      minimumTrackTintColor = 'tomato'
+      maximumTrackTintColor='#000'
+      thumbTintColor='tomato'
+      value={0}
+      onValueChange={value=>setRangedua(value)}
+      onSlidingStart={()=>setSlidingdua('Sliding')}
+      onSlidingComplete={()=>setSlidingdua('Active')}
+      />
 
 
-          <TouchableOpacity style = {{padding:10, width:70, height:50, backgroundColor:'#FF0000', alignItems:'center', marginRight:10, marginLeft:10}}>
-            <Text style = {{color:'#fff'}}>Panas</Text>
-          </TouchableOpacity>
+<TouchableOpacity style = {EnergyStyle.tombolplayBata} onPress = {()=>{BerubahBata()}}>
+              <Text style = {{color:'#fff', alignItems:'center', textAlign:'center'}}>Lihat Reaksi Bata</Text>
+        </TouchableOpacity>
 
-          
-          <TouchableOpacity style = {{padding:10, width:70, height:50, backgroundColor:'#FF0000', alignItems:'center', marginRight:10, marginLeft:10}}>
-            <Text style = {{color:'#fff'}}>Dingin</Text>
-          </TouchableOpacity>
+
+
+          {/* <View style = {EnergyStyle.controlBesi}>
 
           </View>
 
 
           <View style = {EnergyStyle.controlBata} >
-          <TouchableOpacity style = {{padding:10, width:70, height:50, backgroundColor:'#FF0000', alignItems:'center', marginRight:10, marginLeft:10}}>
-            <Text style = {{color:'#fff'}}>Panas</Text>
-          </TouchableOpacity>
 
-          
-          <TouchableOpacity style = {{padding:10, width:70, height:50, backgroundColor:'#FF0000', alignItems:'center', marginRight:10, marginLeft:10}}>
-            <Text style = {{color:'#fff'}}>Dingin</Text>
-          </TouchableOpacity>
-          </View>
+          </View> */}
 
 
          
@@ -262,7 +367,8 @@ const EnergyStyle = StyleSheet.create({
     // marginTop:20,
     paddingBottom:20,
     marginBottom:20,
-    flexDirection:'row',
+    paddingTop:20,
+    // flexDirection:'row',
 
   },
 
@@ -306,14 +412,15 @@ const EnergyStyle = StyleSheet.create({
     marginBottom:-15,
   },
 
-  tombolplay:{
-    backgroundColor:'#000',
-    width:100,
+  tombolplayBesi:{
+    backgroundColor:'#737373',
+    width:150,
     padding:15,
     alignItems:'center',
     justifyContent:'center',
     marginTop:15,
     marginBottom:15,
+    borderRadius:20,
 
   },
 
@@ -325,6 +432,19 @@ const EnergyStyle = StyleSheet.create({
     justifyContent:'center',
     flexDirection:'row',
 
+  },
+
+
+
+  tombolplayBata:{
+    backgroundColor:'#b22222',
+    width:150,
+    padding:15,
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:15,
+    marginBottom:15,
+    borderRadius:20,
   },
 
 
