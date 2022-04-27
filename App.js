@@ -115,18 +115,18 @@ const SIZE = 50.0;
 
 
 
-function Energy(){
+function Energy(props){
 
 
-  const [range, setRange] = useState(50);
+  const [range, setRange] = useState(0);
   const [sliding, setSliding] = useState('Inactive');
 
-  const [rangedua, setRangedua] = useState(50);
+  const [rangedua, setRangedua] = useState(0);
   const [slidingdua, setSlidingdua] = useState('Inactive');
 
-  var  [energyBesi, setEnergyBesi] = React.useState(null); 
+  var  [energyBesi, setEnergyBesi] = React.useState(0); 
 
-  var [energyBata, setEnergyBata] = React.useState(null);
+  var [energyBata, setEnergyBata] = React.useState(0);
 
   const neutral = require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/bg_kosong.png');
 
@@ -154,12 +154,12 @@ function Energy(){
 
 
   const perhitunganEnergyBesi = () => {
-   let wbesi = parseFloat(massaBesi*kalorbesi*range);
+   let wbesi = parseFloat(massaBesi*kalorbesi*(range-0));
    setEnergyBesi(wbesi);
   }
 
   const perhitunganEnergyBata = () => {
-    let wbata = parseFloat(massaBata*kalorbata*rangedua);
+    let wbata = parseFloat(massaBata*kalorbata*(rangedua-0));
     setEnergyBata(wbata);
   }
 
@@ -235,6 +235,47 @@ function Energy(){
     <View>
       <ScrollView>
 
+        <View style = {EnergyStyle.container0}>
+          <View style = {{alignItems:'center', justifyContent:'center', width:'25%', flexDirection:'row'}}>
+            
+            <TouchableOpacity
+            onPress = {()=>props.navigation.navigate('Task')}
+            >
+            <Icon
+        
+  raised
+  name='arrow-left'
+  type='font-awesome'
+  color='#424242'
+  // onPress={}
+   />
+              {/* <Text>back</Text> */}
+            </TouchableOpacity>
+          </View>
+
+
+
+          <View style = {{alignItems:'center', justifyContent:'center', width:'15%', flexDirection:'row'}}>
+
+          </View>
+
+
+
+          {/* <View style = {{alignItems:'center', justifyContent:'center', width:'10%', flexDirection:'row'}}>
+  
+          </View> */}
+
+
+
+          <View style = {{alignItems:'center', justifyContent:'center', width:'60%', flexDirection:'row'}}>
+            <TouchableOpacity style = {{backgroundColor:'#221A82',  marginRight:10, marginLeft:10, padding:10, justifyContent:'center', alignItems:'center', width:150, borderRadius:15}}>
+              <Text style = {{textAlign:'center', color:'#fff'}}>Lihat Persamaan Energy</Text>
+            </TouchableOpacity>
+          </View>
+
+
+        </View>
+
 
         <View style = {EnergyStyle.container1}>
           <View style = {EnergyStyle.panci1}>
@@ -289,7 +330,9 @@ function Energy(){
 
         
         <Text style = {{fontSize:20, fontWeight:'bold'}}>Temperatur Besi : {range} {'\u00b0'}C {'\n'}</Text>
-        <Text>Status : {energyBesi}</Text>
+        <Text>Massa : 10 kg</Text>
+        <Text>Kalor Jenis : 450 J/kg</Text>
+        <Text>Energi : {energyBesi} Joule</Text>
 
         <Slider 
       style = {{width:250, height:40}}
@@ -316,6 +359,8 @@ function Energy(){
         <View style = {EnergyStyle.container3}>
 
         <Text style = {{fontSize:20, fontWeight:'bold'}}>Temperatur Bata : {rangedua} {'\u00b0'}C {'\n'}</Text>
+        <Text>Massa : 10 kg</Text>
+        <Text>Kalor Jenis : 438 J/kg</Text>
         <Text>Energi : {energyBata} Joule</Text>
 
         <Slider 
@@ -398,6 +443,22 @@ function Energy(){
 
 const EnergyStyle = StyleSheet.create({
 
+  container0:{
+    flex:1,
+    backgroundColor:'#FFF7D4',
+    alignItems:'center',
+    justifyContent:'center',
+    // zIndex:2,
+    width:'100%',
+    height:100,
+    // marginTop:20,
+    // marginBottom:20,
+    paddingTop:10,
+    paddingBottom:10,
+    flexDirection:'row',
+
+  },
+
 
   container1:{
     flex:1,
@@ -407,7 +468,7 @@ const EnergyStyle = StyleSheet.create({
     // zIndex:2,
     width:'100%',
     height:200,
-    marginTop:20,
+    // marginTop:20,
     // marginBottom:20,
     paddingTop:20,
     paddingBottom:20,
