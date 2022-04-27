@@ -124,28 +124,65 @@ function Energy(){
   const [rangedua, setRangedua] = useState(50);
   const [slidingdua, setSlidingdua] = useState('Inactive');
 
+  var  [energyBesi, setEnergyBesi] = React.useState(null); 
+
+  var [energyBata, setEnergyBata] = React.useState(null);
+
+  const neutral = require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/bg_kosong.png');
 
   const api = require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/api.png');
   const ice = require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/ice.png');
-  const gambar = {api, ice};
+  const gambar = {api, ice, neutral};
+
+  //Massa Besi dan Bata
+  const massaBesi=10;
+  const massaBata=10;
+
+// Kalor Jenis Besi
+  const kalorbesi = 450;
+  const kalorbata = 438;
 
 
- var [picsapi, setPicsapi] = React.useState(gambar.api);
+ var [picsapi, setPicsapi] = React.useState(gambar.neutral);
 
- var [picsice, setPicice] = React.useState(gambar.ice);
+ var [picsice, setPicice] = React.useState(gambar.neutral);
 
 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+
+
+  const perhitunganEnergyBesi = () => {
+   let wbesi = parseFloat(massaBesi*kalorbesi*range);
+   setEnergyBesi(wbesi);
+  }
+
+  const perhitunganEnergyBata = () => {
+    let wbata = parseFloat(massaBata*kalorbata*rangedua);
+    setEnergyBata(wbata);
+  }
+
+
+
+
+
+
+
   // const nilaiSwitchBesi = parseInt(value*100) + '%';
 
 
   const BerubahBesi = () => {
-    if(range < 50){
+    if(range<0){
 
       picsapi = setPicsapi(gambar.ice);
       // picsice = setPicice(gambar.ice);
+
+    }
+
+    else if(range>0 && range<=50)
+    {
+      picsapi = setPicsapi(gambar.neutral);
 
     }
 
@@ -173,7 +210,13 @@ function Energy(){
 
     }
 
-    else if (rangedua < 50) {
+    else if(rangedua>0 && rangedua<=50)
+    {
+      picsice = setPicice(gambar.neutral);
+
+    }
+
+    else if (rangedua<0) {
       picsice = setPicice(gambar.ice);
       // picsice = setPicice(gambar.ice);
     } 
@@ -214,10 +257,12 @@ function Energy(){
           </View>
 
           <View style = {EnergyStyle.panci2}>
+
           <View  style = {EnergyStyle.kotakbata}>
           <Text style = {{color:'#fff', fontSize:15, flex:1, alignItems:'center', justifyContent:'center'}}>Bata
           </Text>
           </View>
+
           <View style = {{alignItems:'center', justifyContent:'center', marginBottom:-55, zIndex:3}}>
           <Image source = {require('D:/XAMPP/htdocs/khusus-mobile-apps/Brina_project/src/tripod.png')} style = {{width:70, height:70 }} />
           </View>
@@ -244,23 +289,24 @@ function Energy(){
 
         
         <Text style = {{fontSize:20, fontWeight:'bold'}}>Temperatur Besi : {range} {'\u00b0'}C {'\n'}</Text>
-        <Text>Status : {sliding}</Text>
+        <Text>Status : {energyBesi}</Text>
 
         <Slider 
       style = {{width:250, height:40}}
-      minimumValue = {0}
+      minimumValue = {-100}
       maximumValue = {100}
       minimumTrackTintColor = 'tomato'
       maximumTrackTintColor='#000'
       thumbTintColor='tomato'
-      value={0}
+      value={range}
       onValueChange={value=>setRange(value)}
+      // onValueChange={range}
       onSlidingStart={()=>setSliding('Sliding')}
       onSlidingComplete={()=>setSliding('Active')}
       />
 
 
-      <TouchableOpacity style = {EnergyStyle.tombolplayBesi} onPress = {()=>{BerubahBesi()}}>
+      <TouchableOpacity style = {EnergyStyle.tombolplayBesi} onPress = {()=>{BerubahBesi() ; perhitunganEnergyBesi()}}>
               <Text style = {{color:'#fff', alignItems:'center', textAlign:'center'}}>Lihat Reaksi Besi</Text>
         </TouchableOpacity>
 
@@ -270,23 +316,23 @@ function Energy(){
         <View style = {EnergyStyle.container3}>
 
         <Text style = {{fontSize:20, fontWeight:'bold'}}>Temperatur Bata : {rangedua} {'\u00b0'}C {'\n'}</Text>
-        <Text>Status : {slidingdua}</Text>
+        <Text>Energi : {energyBata} Joule</Text>
 
         <Slider 
       style = {{width:250, height:40}}
-      minimumValue = {0}
+      minimumValue = {-100}
       maximumValue = {100}
       minimumTrackTintColor = 'tomato'
       maximumTrackTintColor='#000'
       thumbTintColor='tomato'
-      value={0}
+      value={rangedua}
       onValueChange={value=>setRangedua(value)}
       onSlidingStart={()=>setSlidingdua('Sliding')}
       onSlidingComplete={()=>setSlidingdua('Active')}
       />
 
 
-<TouchableOpacity style = {EnergyStyle.tombolplayBata} onPress = {()=>{BerubahBata()}}>
+<TouchableOpacity style = {EnergyStyle.tombolplayBata} onPress = {()=>{BerubahBata() ; perhitunganEnergyBata()}}>
               <Text style = {{color:'#fff', alignItems:'center', textAlign:'center'}}>Lihat Reaksi Bata</Text>
         </TouchableOpacity>
 
@@ -301,11 +347,37 @@ function Energy(){
 
           </View> */}
 
-
-         
-
-
         </View> 
+
+
+
+
+
+
+
+        {/* <View style = {EnergyStyle.container4}>
+
+        <Text style = {{fontSize:20, fontWeight:'bold', marginBottom:10}}>Kalkulasi Energi</Text>
+
+          <TouchableOpacity style = {{backgroundColor:'#005b8f', padding:20, alignItems:'center', justifyContent:'center'}}>
+            <Text style = {{textAlign:'center', color:'#fff', fontWeight:'bold'}}>Joule</Text>
+          </TouchableOpacity>
+
+
+        </View> */}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       </ScrollView>
      
@@ -366,11 +438,31 @@ const EnergyStyle = StyleSheet.create({
     height:'50%',
     // marginTop:20,
     paddingBottom:20,
+    // marginBottom:20,
+    paddingTop:20,
+    // flexDirection:'row',
+
+  },
+
+
+  container4:{
+    flex:4,
+    backgroundColor:'#FFF7D4',
+    alignItems:'center',
+    justifyContent:'center',
+    zIndex:2,
+    width:'100%',
+    height:'50%',
+    // marginTop:20,
+    paddingBottom:20,
     marginBottom:20,
     paddingTop:20,
     // flexDirection:'row',
 
   },
+
+
+
 
   kotakbesi:{
 
@@ -1739,7 +1831,7 @@ you want to learn! </Text>
 
                 {/* <Text style = {{fontWeight:'bold', color:'#435665'}}>25 %</Text> */}
                 <TouchableOpacity onPress={
-        ()=>props.navigation.navigate('Level 1')
+        ()=>props.navigation.navigate('Energy')
         } style = {{backgroundColor:'#221A82', paddingTop:5, paddingBottom:5,paddingLeft:10, paddingRight:10, borderRadius:10 }} >
 
 
